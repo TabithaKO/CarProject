@@ -13,6 +13,19 @@
 #
 # I added my own method of drawing boxes and labels using OpenCV.
 
+
+#####SELF-DRIVING CAR REVISED SCRIPT#############
+#
+# Author: Tabitha Oanda
+# Date: 09/06/2020
+# Description: 
+# This program uses a pretrained ssd quantized model and then uses the inferences to 
+# determine the next actions of the car. The vision model and .py script was written by the author above
+# The addition of the car controls and the ultra sonic sensor is from me. The car controls are from sentdex tutorials 
+# while the ultra sonic sensor control is from this(https://thepihut.com/blogs/raspberry-pi-tutorials/hc-sr04-ultrasonic-range-sensor-on-the-raspberry-pi)
+# blog post. I brought all the sparate pieces together cohesively.
+
+
 # Import packages
 import os
 import argparse
@@ -22,6 +35,11 @@ import sys
 import time
 from threading import Thread
 import importlib.util
+#I'm importing the code from two different .py scripts
+import robot2
+from robot2 import *
+from sensor import distance 
+
 
 # Define VideoStream class to handle streaming of video from webcam in separate processing thread
 # Source - Adrian Rosebrock, PyImageSearch: https://www.pyimagesearch.com/2015/12/28/increasing-raspberry-pi-fps-with-python-and-opencv/
@@ -150,6 +168,7 @@ floating_model = (input_details[0]['dtype'] == np.float32)
 input_mean = 127.5
 input_std = 127.5
 
+
 # Initialize frame rate calculation
 frame_rate_calc = 1
 freq = cv2.getTickFrequency()
@@ -161,6 +180,9 @@ time.sleep(1)
 #for frame1 in camera.capture_continuous(rawCapture, format="bgr",use_video_port=True):
 while True:
 
+   
+    robot2.forward(1)
+    
     # Start timer (for calculating frame rate)
     t1 = cv2.getTickCount()
 
@@ -186,9 +208,13 @@ while True:
     classes = interpreter.get_tensor(output_details[1]['index'])[0] # Class index of detected objects
     scores = interpreter.get_tensor(output_details[2]['index'])[0] # Confidence of detected objects
     #num = interpreter.get_tensor(output_details[3]['index'])[0]  # Total number of detected objects (inaccurate and not needed)
+    
+
+        
 
     # Loop over all detections and draw detection box if confidence is above minimum threshold
     for i in range(len(scores)):
+
         if ((scores[i] > min_conf_threshold) and (scores[i] <= 1.0)):
 
             # Get bounding box coordinates and draw box
@@ -207,7 +233,29 @@ while True:
             label_ymin = max(ymin, labelSize[1] + 10) # Make sure not to draw label too close to top of window
             cv2.rectangle(frame, (xmin, label_ymin-labelSize[1]-10), (xmin+labelSize[0], label_ymin+baseLine-10), (255, 255, 255), cv2.FILLED) # Draw white box to put label text in
             cv2.putText(frame, label, (xmin, label_ymin-7), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 2) # Draw label text
-
+            
+            
+               # Factor in motor control
+            # I want the car to make moves with regards to: a cup, a remote, and a banana
+            # You can pick different items (check the label map)
+            if object_name == "cup" and distance() < 15.0:
+                print("pivoting left")
+                pivot_left(1)#I decided to go with a smaller tf
+                
+            elif object_name == "remote" and distance() < 15.0:
+                print("pivoting right")
+                pivot_right(1) #decided to go with a smaller tf
+                
+            elif object_name == "stop sign" and distance() < 15.0:
+                print("stopping")
+                stop(1)
+                
+            else:
+                print("moving forward!")
+                forward(1)
+               
+                
+                
     # Draw framerate in corner of frame
     cv2.putText(frame,'FPS: {0:.2f}'.format(frame_rate_calc),(30,50),cv2.FONT_HERSHEY_SIMPLEX,1,(255,255,0),2,cv2.LINE_AA)
 
