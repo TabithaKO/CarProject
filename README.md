@@ -21,3 +21,48 @@ This project is a compilation of 3 different tutorials on the internet:
 6. [Breadboard & Jumper Wires](https://www.amazon.com/FTCBlock-Breadboards-Arduino-Distribution-Connecting/dp/B07H326BFQ/ref=sr_1_10?crid=YCA8NIITP1S&dchild=1&keywords=breadboard+jumper+wires&qid=1599608180&s=hi&sprefix=bread%2Ctools%2C184&sr=1-10)
 7. [Coral TPU](https://www.amazon.com/Google-G950-01456-01-Coral-USB-Accelerator/dp/B07S214S5Y/ref=sr_1_2?dchild=1&keywords=coral+tpu&qid=1599608247&sr=8-2)
 
+## Usage
+(First run)
+Open up a terminal and type:
+
+``` 
+git clone {this_repo_url}
+cd carProject
+python3 -m venv carProject-venv
+source carProject-venv/source/bin/activate
+bash get_pi_requirements.sh
+python3 TFLite_detection_webcam.py --modeldir= Sample_TFLite_model 
+```
+(Every other time after that)
+Open up a terminal and type:
+``` 
+cd carProject 
+source carProject-venv/source/bin/activate
+python3 TFLite_detection_webcam.py --modeldir= Sample_TFLite_model 
+```
+
+If you have an edgetpu
+``` 
+cd carProject 
+source carProject-venv/source/bin/activate
+python3 TFLite_detection_webcam.py --modeldir= Sample_TFLite_model --edgetpu
+```
+
+
+## Custom Model
+I trained a custom traffic sign model using transfer learning 
+The model is available in the custom folder. To run it instead of the generic .tflite
+``` 
+cd carProject 
+source carProject-venv/source/bin/activate
+python3 TFLite_detection_webcam.py --modeldir= custom_model --graph=road_signs_quantized_edgetpu.tflite --labels=label_map.txt --edgetpu 
+```
+If you dont have a tpu you'd just run
+``` 
+python3 TFLite_detection_webcam.py --modeldir= custom_model --graph=road_signs_quantized_edgetpu.tflite --labels=label_map.txt  
+```
+
+## Future Plans:
+1. Make a schematic for the entire project (At the moment you'll have to review all 3 tutorials)
+2. Clean-up and upload the transfer learning python script 
+3. Make a demo of the car in motion
