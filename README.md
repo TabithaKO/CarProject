@@ -62,6 +62,9 @@ If you dont have a tpu you'd just run
 python3 TFLite_detection_webcam.py --modeldir= custom_model --graph=road_signs_quantized_edgetpu.tflite --labels=label_map.txt  
 ```
 
+## The Tabby-Car
+<img src="https://user-images.githubusercontent.com/50864401/92965349-41a80680-f43b-11ea-97ee-28422588765a.jpg" height="50%" width="50%">
+
 ## Future Plans:
 1. Make a schematic for the entire project (At the moment you'll have to review all 3 tutorials)
 2. Clean-up and upload the transfer learning python script 
