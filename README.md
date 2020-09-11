@@ -8,7 +8,7 @@ This project allows the user to:
 ## Credits:
 This project is a compilation of 3 different tutorials on the internet:
 1. Object Detection on Raspberry Pi [EdjeElectronics](https://github.com/EdjeElectronics/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi.git)
-2. Motor Control Raspberry Pi [Sentdex Series](https://www.youtube.com/watch?v=LlFkybEQFFA&t=330s)
+2. Motor Control on Raspberry Pi [Sentdex Series](https://www.youtube.com/watch?v=LlFkybEQFFA&t=330s)
 3. Ultrasonic sensor w/ Raspberry Pi [ThePiHut](https://thepihut.com/blogs/raspberry-pi-tutorials/hc-sr04-ultrasonic-range-sensor-on-the-raspberry-pi)
 
 
