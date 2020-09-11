@@ -21,5 +21,3 @@ This project is a compilation of 3 different tutorials on the internet:
 6. [Breadboard & Jumper Wires](https://www.amazon.com/FTCBlock-Breadboards-Arduino-Distribution-Connecting/dp/B07H326BFQ/ref=sr_1_10?crid=YCA8NIITP1S&dchild=1&keywords=breadboard+jumper+wires&qid=1599608180&s=hi&sprefix=bread%2Ctools%2C184&sr=1-10)
 7. [Coral TPU](https://www.amazon.com/Google-G950-01456-01-Coral-USB-Accelerator/dp/B07S214S5Y/ref=sr_1_2?dchild=1&keywords=coral+tpu&qid=1599608247&sr=8-2)
 
-## Schematics
-### RPI & Motors
